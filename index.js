@@ -49,17 +49,15 @@
 
 // // Initialize the fetch process
 // fetchPosts();
-    
 
-// Refactor with async/await.
+// 1. Refactor with async/await.
 // Create a function to house fetch and apply async to the function.
 // Apply await to the return of fetch.
 async function fetchPosts() {
   try {
-    // Apply await to the return of fetch.
     const response = await fetch('https://jsonplaceholder.typicode.com/posts');
     const posts = await response.json();
-
+    
     // Call displayPosts() function after fetch.
     displayPosts(posts);
   } catch (error) {
@@ -68,13 +66,14 @@ async function fetchPosts() {
 }
 
 // 2.  Display Posts- Create a function to display posts called displayPosts().
+// Pass in the array of posts.
 function displayPosts(posts) {
-  // Select the ul once outside the loop for better performance
+  // Select the ul: The id of the ul is post-list.
   const ul = document.querySelector('#post-list');
 
   // Loop through the posts list.
   posts.forEach(post => {
-// 3.  Within the loop:
+    // 3.  Within the loop:
     
     // Create a li tag.
     const li = document.createElement('li');
@@ -94,9 +93,11 @@ function displayPosts(posts) {
     li.appendChild(p);
     
     // Append li to the ul: The id of the ul is post-list.
-    ul.appendChild(li);
+    if (ul) {
+      ul.appendChild(li);
+    }
   });
 }
 
-// Initialize the fetch process
+// Call fetchPosts() to start the process
 fetchPosts();
